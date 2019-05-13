@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<link href="css/index.css" rel="stylesheet"/>
+	<body>
+		<img id="eyeimg" src="img/eyeimg.png" />
+		<div id="back">
+			<div class="row">
+				<div class="col">14</div>
+				<div class="col">15</div>
+				<div class="col">8</div>
+				<div class="col">3</div>
+				<div class="col">2</div>
+				<div class="clear"></div>
+			</div>
+			<div class="row">
+				<div class="col">23</div>
+				<div class="col">4</div>
+				<div class="col">19</div>
+				<div class="col">6</div>
+				<div class="col">9</div>
+				<div class="clear"></div>
+			</div>
+			<div class="row">
+				<div class="col">12</div>
+				<div class="col">7</div>
+				<div class="col">22</div>
+				<div class="col">24</div>
+				<div class="col">13</div>
+				<div class="clear"></div>
+			</div>
+			<div class="row">
+				<div class="col">17</div>
+				<div class="col">18</div>
+				<div class="col">21</div>
+				<div class="col">10</div>
+				<div class="col">5</div>
+				<div class="clear"></div>
+			</div>
+			<div class="row">
+				<div class="col">16</div>
+				<div class="col">20</div>
+				<div class="col">11</div>
+				<div class="col">1</div>
+				<div class="col">25</div>
+				<div class="clear"></div>
+			</div>
+			<br />
+			<br />
+			<button id="btn">生成</button>
+			<button id="next">下一个</button>
+		</div>
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js" ></script>
+		<script>
+			
+			//initarr用于获取所有点击的数字
+			var initarr = new Array();
+			var index = 0;
+			var start = undefined;
+			var end = undefined;
+			
+			var intervalLine = new Array();
+			var clearRobotsLine = new Array();
+			var interval = undefined;
+			
+			function remove(interval1,clearRobot1){
+				clearInterval(interval1);
+				clearInterval(clearRobot1);
+			}
+			
+			function setAll(){
+				var shadows1 = new Array();
+				var shadow1 = Math.round(Math.random()*24);
+				
+				var shadows2 = new Array();
+				var shadow2 = Math.round(Math.random()*24);
+				
+				var shadows3 = new Array();
+				var shadow3 = Math.round(Math.random()*24);
+				
+//				时间设置计算|a-b|*n = min(a,b)
+				
+				interval1 = window.setInterval(function(){
+					if(shadows1.length > 90 || shadows1.length > 90 || shadows1.length > 90){
+						alert("对不起，重试请刷新页面");
+						for(var i=0;i<intervalLine.length-3;i++)
+						remove(intervalLine[i]);
+					for(var i=0;i<clearRobotsLine.length-3;i++)
+						remove(clearRobotsLine[i]);
+					}
+					//console.log("hello")
+					$(".col").eq(shadow1).css("background-color","green")
+					shadows1.push(shadow1)
+					//console.log(shadows1.length)
+					shadow1 = Math.round(Math.random()*24);
+				},800)	
+				intervalLine.push(interval1)
+				
+				interval2 = window.setInterval(function(){
+					//console.log("hello2")
+					$(".col").eq(shadow2).css("background-color","darkgreen")
+					shadows2.push(shadow2)
+					//console.log(shadows2.length)
+					shadow2 = Math.round(Math.random()*24);
+				},1000)
+				intervalLine.push(interval2)
+				
+				interval3 = window.setInterval(function(){
+					//console.log("hello3")
+					$(".col").eq(shadow3).css("background-color","yellowgreen")
+					shadows3.push(shadow3)
+					//console.log(shadows3.length)
+					shadow3 = Math.round(Math.random()*24);
+				},1200)
+				intervalLine.push(interval3)
+				
+				clearRobot1 = window.setInterval(function(){
+					$(".col").eq(shadows1[shadows1.length-1]).css("background-color","greenyellow")
+					//console.log("clear"+(shadows1.length-1))
+				},808)
+				clearRobotsLine.push(clearRobot1)
+				
+				clearRobot2 = window.setInterval(function(){
+					$(".col").eq(shadows2[shadows2.length-1]).css("background-color","greenyellow")
+					//console.log("clear"+(shadows2.length-1))
+				},1010)
+				clearRobotsLine.push(clearRobot2)
+				
+				clearRobot3 = window.setInterval(function(){
+					$(".col").eq(shadows3[shadows3.length-1]).css("background-color","greenyellow")
+					//console.log("clear"+(shadows3.length-1))
+				},1212)
+				clearRobotsLine.push(clearRobot3)
+			}
+			
+			//初始化5x5矩阵
+			$("#btn").click(function(){
+				setAll();
+	
+				//计时器列表管理 
+				if(intervalLine.length > 3 || clearRobotsLine.length > 3){
+					for(var i=0;i<intervalLine.length-3;i++){
+						remove(intervalLine[i]);
+						intervalLine.shift();
+					}
+					for(var i=0;i<clearRobotsLine.length-3;i++){
+						remove(clearRobotsLine[i]);
+						clearRobotsLine.shift()
+					}
+				}
+				console.log(intervalLine.length)
+				
+				//刷新initarr
+				initarr = new Array();
+				index = 0;
+				start = undefined;
+				end = undefined;
+				
+				var arr = new Array();
+				for(var i=0;i<25;i++){
+					arr[i] = i+1;
+				}
+	//			for(var i=0;i<25;i++){
+	//				//console.log(arr[i])
+	//			}
+				for(var i=0;i<50;i++){
+					var r1 = Math.round(Math.random()*24);
+					var r2 = Math.round(Math.random()*24);
+	//				//console.log(r1+"    "+r2)
+					var temp = arr[r1];
+					arr[r1] = arr[r2];
+					arr[r2] = temp;
+				}
+	//			for(var i=0;i<25;i++){
+	//				//console.log(arr[i])
+	//			}
+				for(var i=0;i<25;i++){
+//					$("td").eq(i).html("<div class='num'>"+arr[i]+"</div>");
+					$(".col").eq(i).html(arr[i]);
+				}
+//				//console.log($("td").eq(1).html())
+//				//console.log($("td").eq(0).html())
+			})
+			
+			
+			$(".col").click(function(event){
+				
+				//console.log($(this).html())
+				
+				if($(this).html()==1){
+					//console.log("start")
+					start = new Date()
+				}
+				
+				//存储点击数据
+				initarr[index++] = $(this).html()
+				
+				//检查是否点击完25个数字
+				for(var i=0;i<25;i++){
+					if(initarr[i]==null && initarr[i]== undefined ){
+						return;
+					}
+				}
+				//console.log("middle")
+				
+				//检查顺序是否正确
+				initarr = initarr.sort(function(a,b){return a-b})
+				for(var i=0;i<25;i++){
+					//console.log(initarr[i])
+				}
+				for(var i=0;i<25;i++){
+					if(initarr[i] != i+1){
+						alert("请按顺序点击1-25的方块")
+						return;
+					}
+				}
+				end = new Date();
+				for(var i=0;i<intervalLine.length-3;i++)
+						remove(intervalLine[i]);
+					for(var i=0;i<clearRobotsLine.length-3;i++)
+						remove(clearRobotsLine[i]);
+				alert("本次用时"+(end-start)/1000+"秒");
+			})
+			
+			/*使用定时器，每隔几秒让几块砖被遮住*/
+			
+			$("#next").click(function(){
+				$("#back").css("display","none");
+				$("#eyeimg").css("display","block");
+				for(var i=0;i<intervalLine.length-3;i++)
+						remove(intervalLine[i]);
+					for(var i=0;i<clearRobotsLine.length-3;i++)
+						remove(clearRobotsLine[i]);
+			})
+		</script>
+	</body>
+	
+</html>

@@ -1,0 +1,64 @@
+body{
+	background-color: #FFFFCC;
+}
+
+td{
+	text-align: center;
+}
+#back{
+	width: 60em;
+	height: 60em;
+	margin: 5em 10em;
+	display: block;
+}
+
+#eyeimg{
+	width: 35em;
+	height: 35em;
+	margin: 5em 10em;
+	display: none;
+}
+
+#btn{
+	width: 5em;
+	height: 5em;
+	background-color: blue;
+}
+
+#next{
+	width: 5em;
+	height: 5em;
+	background-color: blue;
+}
+
+.col{
+	width: 5em;
+	height: 5em;
+	background-color: greenyellow;
+	float: left;
+	border: dashed 1px;
+	text-align: center;
+	line-height: 5em;
+	/*
+	animation:myfirst 10s;
+	-webkit-animation:myfirst 10s; 
+	animation-iteration-count:4;
+	*/
+}
+
+.clear{
+	clear: both;
+}
+
+
+@keyframes myfirst
+{
+	from {background:greenyellow;}
+	to {background:deepskyblue;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	from {background:greenyellow;}
+	to {background:deepskyblue;}
+}
